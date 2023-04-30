@@ -52,7 +52,7 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   renderPlane: {fileID: 1739124205225855031}
   localCamera: {fileID: 4263908898107818067}
-  shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  shader: {fileID: 4800000, guid: 0ff38f7a1dcf5a15db6b6fdb0a52849c, type: 3}
   teleporter: {fileID: 5031229807849990754}
   localMaterial: {fileID: 0}
 --- !u!1 &2473257499623181565
@@ -540,9 +540,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6716764219856640901}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 1.57, y: 2.07, z: 10.535}
-  m_LocalScale: {x: 0.26221, y: 1, z: 0.4289515}
+  m_LocalScale: {x: 0.25, y: 0.3, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8680486812939165747}
@@ -576,7 +576,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
