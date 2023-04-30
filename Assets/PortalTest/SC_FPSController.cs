@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class SC_FPSController : MonoBehaviour
 {
+    // set to false to destroy all FPSControllers
+    public static bool FPSControlsEnabled = true;
+    // set to an instance to destroy all other instances
+    public static SC_FPSController singleton = null;
+
     public float walkingSpeed = 7.5f;
     public float runningSpeed = 11.5f;
     public float jumpSpeed = 8.0f;
@@ -32,6 +37,11 @@ public class SC_FPSController : MonoBehaviour
 
     void Update()
     {
+        if(!FPSControlsEnabled || (singleton && singleton != this))
+        {
+            Destroy(gameObject);
+            return;
+        }
         // We are grounded, so recalculate move direction based on axes
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
