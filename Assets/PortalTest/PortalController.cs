@@ -21,21 +21,17 @@ public class PortalController : MonoBehaviour
 
     void Start()
     {
-        // setup local portal state
+        // setup local state not dependent on configuration.
         localCamera.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
-        if(remotePortal == null || playerRoot == null)
-        {
-            Debug.Log("Portal not configured; not initializing");
-            return;
-        }
-        playerCamera = playerRoot.GetComponentInChildren<Camera>(false).transform;
         localMaterial = new Material(shader);
-        
         localMaterial.mainTexture = localCamera.targetTexture;
-        teleporter.player = playerRoot;
     }
     void LateStart()
     {
+        // setup local state dependent on configuration and remote portal
+        playerCamera = playerRoot.GetComponentInChildren<Camera>(false).transform;
+        teleporter.player = playerRoot;
+
         // things to fetch from the remote portal. Must be done after the other portal has done Start().
         remoteCamera = remotePortal.localCamera;
         renderPlane.material = remotePortal.localMaterial;
@@ -44,13 +40,16 @@ public class PortalController : MonoBehaviour
 
     void Update()
     {
+        // If we're not configured with a remote portal, wait until we are
         if(remotePortal == null || playerRoot == null) { return; }
+        // if we are but local state is missing, set it up now.
         if(remoteCamera == null) { LateStart(); }
     }
 
     void LateUpdate()
     {
-        if(remotePortal == null || playerRoot == null) { return; }
+        // wait for lazy initialization
+        if(remotePortal == null || playerRoot == null || remoteCamera == null) { return; }
 
         Transform portal = transform;
         Transform otherPortal = remotePortal.transform;
