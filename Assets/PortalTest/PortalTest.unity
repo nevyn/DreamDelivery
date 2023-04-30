@@ -1319,6 +1319,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 466934985623941954, guid: 09ca64bc09e58bb28b37719c95b09518,
         type: 3}
+      propertyPath: playerRoot
+      value: 
+      objectReference: {fileID: 604871068}
+    - target: {fileID: 466934985623941954, guid: 09ca64bc09e58bb28b37719c95b09518,
+        type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 604871068}
@@ -1606,6 +1611,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal
       objectReference: {fileID: 0}
+    - target: {fileID: 466934985623941954, guid: 09ca64bc09e58bb28b37719c95b09518,
+        type: 3}
+      propertyPath: playerRoot
+      value: 
+      objectReference: {fileID: 604871068}
     - target: {fileID: 466934985623941954, guid: 09ca64bc09e58bb28b37719c95b09518,
         type: 3}
       propertyPath: playerCamera

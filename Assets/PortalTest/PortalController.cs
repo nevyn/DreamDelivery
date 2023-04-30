@@ -6,7 +6,7 @@ public class PortalController : MonoBehaviour
 {
     // set these externally
     public PortalController remotePortal;
-    public Transform playerCamera;
+    public Transform playerRoot;
 
     // prefab ivars
     public MeshRenderer renderPlane;
@@ -15,17 +15,19 @@ public class PortalController : MonoBehaviour
     public PortalTeleporter teleporter;
 
     // code-only ivars
+    Transform playerCamera;
     Camera remoteCamera;
     [HideInInspector] public Material localMaterial;
 
     void Start()
     {
         // setup local portal state
+        playerCamera = playerRoot.GetComponentInChildren<Camera>(false).transform;
         localMaterial = new Material(shader);
         localMaterial.name = "RenderMaterial";
         localCamera.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
         localMaterial.mainTexture = localCamera.targetTexture;
-        teleporter.player = playerCamera;
+        teleporter.player = playerRoot;
         
 
         // things to fetch from the remote portal
@@ -38,6 +40,7 @@ public class PortalController : MonoBehaviour
     {
         Transform portal = transform;
         Transform otherPortal = remotePortal.transform;
+
 
         Vector3 playerOffsetFromPortal = playerCamera.position - otherPortal.position;
 		localCamera.transform.position = portal.position + playerOffsetFromPortal;
