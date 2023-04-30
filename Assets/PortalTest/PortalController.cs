@@ -24,16 +24,21 @@ public class PortalController : MonoBehaviour
         // setup local portal state
         playerCamera = playerRoot.GetComponentInChildren<Camera>(false).transform;
         localMaterial = new Material(shader);
-        localMaterial.name = "RenderMaterial";
         localCamera.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
         localMaterial.mainTexture = localCamera.targetTexture;
         teleporter.player = playerRoot;
-        
-
-        // things to fetch from the remote portal
+    }
+    void LateStart()
+    {
+        // things to fetch from the remote portal. Must be done after the other portal has done Start().
         remoteCamera = remotePortal.localCamera;
         renderPlane.material = remotePortal.localMaterial;
         teleporter.reciever = remotePortal.teleporter.transform;
+    }
+
+    void Update()
+    {
+        if(remoteCamera == null) { LateStart(); }
     }
 
     void LateUpdate()
