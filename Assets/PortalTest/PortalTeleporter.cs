@@ -12,7 +12,7 @@ public class PortalTeleporter : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (playerIsOverlapping)
+		if (playerIsOverlapping && player && reciever)
 		{
 			Vector3 portalToPlayer = player.position - transform.position;
 			float dotProduct = Vector3.Dot(transform.up, portalToPlayer);
