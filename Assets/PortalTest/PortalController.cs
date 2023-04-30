@@ -12,10 +12,11 @@ public class PortalController : MonoBehaviour
     public MeshRenderer renderPlane;
     public Camera localCamera;
     public Shader shader;
+    public PortalTeleporter teleporter;
 
     // code-only ivars
     Camera remoteCamera;
-    public Material localMaterial;
+    [HideInInspector] public Material localMaterial;
 
     void Start()
     {
@@ -24,11 +25,13 @@ public class PortalController : MonoBehaviour
         localMaterial.name = "RenderMaterial";
         localCamera.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
         localMaterial.mainTexture = localCamera.targetTexture;
+        teleporter.player = playerCamera;
         
 
         // things to fetch from the remote portal
         remoteCamera = remotePortal.localCamera;
         renderPlane.material = remotePortal.localMaterial;
+        teleporter.reciever = remotePortal.teleporter.transform;
     }
 
     void LateUpdate()
