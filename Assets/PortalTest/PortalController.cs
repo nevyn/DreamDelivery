@@ -22,9 +22,15 @@ public class PortalController : MonoBehaviour
     void Start()
     {
         // setup local portal state
+        localCamera.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
+        if(remotePortal == null || playerRoot == null)
+        {
+            Debug.Log("Portal not configured; not initializing");
+            return;
+        }
         playerCamera = playerRoot.GetComponentInChildren<Camera>(false).transform;
         localMaterial = new Material(shader);
-        localCamera.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
+        
         localMaterial.mainTexture = localCamera.targetTexture;
         teleporter.player = playerRoot;
     }
@@ -38,11 +44,14 @@ public class PortalController : MonoBehaviour
 
     void Update()
     {
+        if(remotePortal == null || playerRoot == null) { return; }
         if(remoteCamera == null) { LateStart(); }
     }
 
     void LateUpdate()
     {
+        if(remotePortal == null || playerRoot == null) { return; }
+
         Transform portal = transform;
         Transform otherPortal = remotePortal.transform;
 
